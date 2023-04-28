@@ -1,0 +1,14 @@
+{
+  "name": "biuro-ubezpieczen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maciej Chmiel",
+  "license": "MIT",
+  "devDependencies": {
+    "sass": "^1.62.1"
+  }
+}

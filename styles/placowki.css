@@ -1,0 +1,12 @@
+table {
+  margin-inline: auto;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td, th {
+  border: 1px solid black;
+  padding: 0.5rem;
+}
+
+/*# sourceMappingURL=placowki.css.map */
