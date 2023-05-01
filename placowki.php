@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="./styles/global.css">
 	<link rel="stylesheet" href="./styles/placowki.css">
 	<?php
+	require_once 'config.php';
+
 	include_once('templates\Template.php');
 	include_once('templates\Nav.php');
 
@@ -30,7 +32,8 @@ echo templates\Template::Render($nav);
 			<th>Adres</th>
 		</tr>
 		<?php
-		$conn = mysqli_connect('192.168.0.250:3306', 'biuro_ubezpieczen', '5hE2GK@Gcs8dx5^&', 'biuro_ubezpieczen') or die;
+		$conn = mysqli_connect($hostname, $username, $password, $dbName) or die;
+
 
 		$query = "SELECT nazwa, adresy.kraj, adresy.miasto, adresy.ulica, adresy.budynek FROM `placowki` INNER JOIN adresy on placowki.adres_id=adresy.id;";
 
