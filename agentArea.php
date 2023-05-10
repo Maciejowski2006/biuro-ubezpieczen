@@ -15,7 +15,7 @@
     session_start();
 
     if (isset($_SESSION['isLoggedIn']))
-        if (!$_SESSION['isClient'])
+        if (!$_SESSION['isAgent'])
             header("location: index.php");
     ?>
 </head>
@@ -73,20 +73,20 @@ HTML;
 </nav>
 <main>
     <section class="insuances">
-        <h2>Moje ubezpieczenia</h2>
+        <h2>Klienci</h2>
         <?php
         $connection = mysqli_connect($hostname, $username, $password, $dbName) or die;
 
-        $query = "SELECT id FROM klienci WHERE dane_id=\"" . $_SESSION['daneId'] . "\";";
+        $query = "SELECT id FROM agenci WHERE dane_id=\"" . $_SESSION['daneId'] . "\";";
 
         $result = mysqli_query($connection, $query);
 
         if ($result->num_rows > 0) {
             $row = mysqli_fetch_assoc($result);
 
-            $userId = $row['id'];
+            $agentId = $row['id'];
 
-            $query2 = "SELECT tytul, opis, kwota, typ FROM ubezpieczenia WHERE klient_id=\"" . $userId . "\";";
+            $query2 = "SELECT dane.imie, dane.nazwisko, dane.email, dane.telefon FROM klienci INNER JOIN dane ON klienci.dane_id=dane.id WHERE agent_id=\"" . $agentId . "\";";
 
             $result2 = mysqli_query($connection, $query2);
 
@@ -94,25 +94,26 @@ HTML;
                 echo <<<HTML
 <table>
 		<tr>
-			<th>Tytuł</th>
-			<th>Opis</th>
-			<th>Kwota</th>
-			<th>Typ</th>
+			<th>Imię</th>
+			<th>Nazwisko</th>
+			<th>Email</th>
+			<th>Telefon</th>
 		</tr>
 HTML;
 
                 while ($row = mysqli_fetch_assoc($result2)) {
                     echo "<tr>";
-                    echo "<td>" . $row['tytul'] . "</td>";
-                    echo "<td>" . $row['opis'] . "</td>";
-                    echo "<td>" . $row['kwota'] . "</td>";
-                    echo "<td>" . $row['typ'] . "</td>";
+                    echo "<td>" . $row['imie'] . "</td>";
+                    echo "<td>" . $row['nazwisko'] . "</td>";
+                    echo "<td>" . $row['email'] . "</td>";
+                    echo "<td>" . $row['telefon'] . "</td>";
                     echo "</tr>";
                 }
                 echo "</table>";
             }
         }
         ?>
+        
     </section>
     <section class="myData">
         <h2>Moje dane</h2>

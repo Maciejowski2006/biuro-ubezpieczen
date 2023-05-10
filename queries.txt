@@ -1,5 +1,8 @@
 actions/login: 4
+actions/sendRequest: 1
 placowki: 1
-clientArea: 2
+clientArea: 3
+agentArea: 3
+adminArea: 1
 
-queries left: 17
+queries left: 11

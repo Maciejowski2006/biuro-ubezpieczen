@@ -20,8 +20,9 @@ main section td, main section th {
   border: 1px solid black;
   padding: 0.5rem;
 }
-main .myData {
-  background-color: blue;
+
+.bold {
+  font-weight: 600;
 }
 
 /*# sourceMappingURL=clientArea.css.map */

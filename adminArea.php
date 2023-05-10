@@ -15,7 +15,7 @@
     session_start();
 
     if (isset($_SESSION['isLoggedIn']))
-        if (!$_SESSION['isClient'])
+        if (!$_SESSION['isAdministrator'])
             header("location: index.php");
     ?>
 </head>
@@ -73,56 +73,24 @@ HTML;
 </nav>
 <main>
     <section class="insuances">
-        <h2>Moje ubezpieczenia</h2>
-        <?php
-        $connection = mysqli_connect($hostname, $username, $password, $dbName) or die;
-
-        $query = "SELECT id FROM klienci WHERE dane_id=\"" . $_SESSION['daneId'] . "\";";
-
-        $result = mysqli_query($connection, $query);
-
-        if ($result->num_rows > 0) {
-            $row = mysqli_fetch_assoc($result);
-
-            $userId = $row['id'];
-
-            $query2 = "SELECT tytul, opis, kwota, typ FROM ubezpieczenia WHERE klient_id=\"" . $userId . "\";";
-
-            $result2 = mysqli_query($connection, $query2);
-
-            if ($result2->num_rows > 0) {
-                echo <<<HTML
-<table>
-		<tr>
-			<th>Tytuł</th>
-			<th>Opis</th>
-			<th>Kwota</th>
-			<th>Typ</th>
-		</tr>
-HTML;
-
-                while ($row = mysqli_fetch_assoc($result2)) {
-                    echo "<tr>";
-                    echo "<td>" . $row['tytul'] . "</td>";
-                    echo "<td>" . $row['opis'] . "</td>";
-                    echo "<td>" . $row['kwota'] . "</td>";
-                    echo "<td>" . $row['typ'] . "</td>";
-                    echo "</tr>";
-                }
-                echo "</table>";
-            }
-        }
-        ?>
+        <h2>Konsola MariaDB</h2>
+        <form action="actions/sendRequest.php" method="post">
+            <label for="sql">
+                SQL
+                <input type="text" name="sql">
+            </label>
+            <input type="submit" value="Wyślij">
+        </form>
     </section>
     <section class="myData">
         <h2>Moje dane</h2>
         <?php
-        $query3 = "SELECT imie, nazwisko, telefon, email, adresy.* FROM dane INNER JOIN adresy ON dane.adres_id=adresy.id WHERE dane.id=\"" . $_SESSION['daneId'] . "\";";
+        $connection = mysqli_connect($hostname, $username, $password, $dbName) or die;
+
+        $query3 = "SELECT imie, nazwisko, telefon, email, adresy.*, administratorzy.rola FROM dane INNER JOIN adresy ON dane.adres_id=adresy.id INNER JOIN administratorzy ON dane.id=administratorzy.dane_id WHERE dane.id=\"" . $_SESSION['daneId'] . "\";";
         $result3 = mysqli_query($connection, $query3);
 
         if ($result3->num_rows > 0) {
-
-
             $row = mysqli_fetch_assoc($result3);
             echo "<span class='text'><span class='bold'>Imię i nazwisko:</span> " . $row['imie'] . " " . $row['nazwisko'] . "</span>";
             echo "<span class='text'><span class='bold'>Adres e-mail:</span> " . $row['email'] . "</span>";
@@ -133,6 +101,7 @@ HTML;
                 $addressLine = $row['kraj'] . ", " . $row['wojewodztwo'] . ", " . $row['miasto'] . ", " . $row['ulica'] . " " . $row['budynek'] . "/" . $row['mieszkanie'] . " (" . substr_replace($row['kod_pocztowy'], "-", 2, 0) . ")";
 
             echo "<span class='text'><span class='bold'>Adres:</span> " . $addressLine . "</span>";
+            echo "<span class='text'><span class='bold'>Rola:</span> " . $row['rola'] . "</span>";
 
 
         }
