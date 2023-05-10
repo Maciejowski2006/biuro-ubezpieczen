@@ -1,0 +1,5 @@
+actions/login: 4
+placowki: 1
+clientArea: 2
+
+queries left: 17

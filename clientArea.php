@@ -7,13 +7,16 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<title>Ubezpieczenia Graniczna</title>
 	<link rel="stylesheet" href="./styles/global.css">
-	<link rel="stylesheet" href="./styles/placowki.css">
+	<link rel="stylesheet" href="styles/clientArea.css">
 	<link rel="stylesheet" href="./styles/nav.css">
 	<?php
-	require_once 'config.php';
+		require_once 'config.php';
 
 		session_start();
 
+		if (isset($_SESSION['isLoggedIn']))
+			if (!$_SESSION['isClient'])
+				header("location: index.php");
 	?>
 </head>
 <body>
@@ -69,33 +72,52 @@ HTML;
 	?>
 </nav>
 <main>
-	<h2>Nasze placówki</h2>
-	<p>Mamy wiele placówek które obsługują miliony klientów na całym świecie. Niestety nasza baza danych jest jeszcze
-		nie dokończona, więc widoczna jest tylko jedna placówka.</p>
-	<table>
-		<tr>
-			<th>Nazwa</th>
-			<th>Kraj</th>
-			<th>Adres</th>
-		</tr>
+	<section class="insuances">
+		<h2>Moje ubezpieczenia</h2>
 		<?php
-		$conn = mysqli_connect($hostname, $username, $password, $dbName) or die;
+			$connection = mysqli_connect($hostname, $username, $password, $dbName) or die;
 
+			$query = "SELECT id FROM klienci WHERE dane_id=\"" . $_SESSION['daneId'] . "\";";
 
-		$query = "SELECT nazwa, adresy.kraj, adresy.miasto, adresy.ulica, adresy.budynek FROM `placowki` INNER JOIN adresy on placowki.adres_id=adresy.id;";
+			$result = mysqli_query($connection, $query);
 
-		$res = mysqli_query($conn, $query);
+			if ($result->num_rows > 0) {
+				$row = mysqli_fetch_assoc($result);
 
-		while ($row = mysqli_fetch_assoc($res)) {
-			echo "<tr>";
-			echo "<td>" . $row['nazwa'] . "</td>";
-			echo "<td>" . $row['kraj'] . "</td>";
-			echo "<td>" . $row['miasto'] . ", " . $row['ulica'] . " " . $row['budynek'] . "</td>";
-			echo "</tr>";
-		}
+				$userId = $row['id'];
+
+				$query2 = "SELECT tytul, opis, kwota, typ FROM ubezpieczenia WHERE klient_id=\"" . $userId . "\";";
+
+				$result2 = mysqli_query($connection, $query2);
+
+				if ($result2->num_rows > 0)
+				{
+					echo <<<HTML
+<table>
+		<tr>
+			<th>Tytuł</th>
+			<th>Opis</th>
+			<th>Kwota</th>
+			<th>Typ</th>
+		</tr>
+HTML;
+
+					while ($row = mysqli_fetch_assoc($result2)) {
+						echo "<tr>";
+						echo "<td>" . $row['tytul'] . "</td>";
+						echo "<td>" . $row['opis'] . "</td>";
+						echo "<td>" . $row['kwota'] . "</td>";
+						echo "<td>" . $row['typ'] . "</td>";
+						echo "</tr>";
+					}
+					echo "</table>";
+				}
+			}
 		?>
-	</table>
-</main>
+	</section>
+	<section class="myData">
 
+	</section>
+</main>
 </body>
 </html>

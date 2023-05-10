@@ -8,10 +8,11 @@ body {
   margin: 0;
   font-family: "Encode Sans Semi Expanded", sans-serif;
   font-weight: 300;
+  background-color: #eee;
 }
 
 main {
-  max-width: 70rem;
+  max-width: 74rem;
   margin-inline: auto;
   height: calc(100vh - 4rem);
 }
