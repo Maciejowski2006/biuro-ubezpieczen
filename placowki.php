@@ -66,6 +66,14 @@ HTML;
 </span>
 HTML;
 			}
+		if (isset($_SESSION['isAdministrator']) || isset($_SESSION['isAgent']))
+			if ($_SESSION['isAdministrator'] || isset($_SESSION['isAgent'])) {
+				echo <<<HTML
+<span>
+	<a href="dbManager.php">Menedżer bazy danych</a>
+</span>
+HTML;
+			}
 	?>
 </nav>
 <main>

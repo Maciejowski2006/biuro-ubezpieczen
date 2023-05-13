@@ -1,8 +1,10 @@
 actions/login: 4
 actions/sendRequest: 1
+actions/dbManager/*: 7
+index: 4
 placowki: 1
 clientArea: 3
 agentArea: 3
 adminArea: 1
 
-queries left: 11
+queries left: 0

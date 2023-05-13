@@ -29,46 +29,54 @@
     </span>
 
     <?php
-    if (isset($_SESSION['isLoggedIn'])) {
-        if ($_SESSION['isLoggedIn']) {
-            echo <<<HTML
+        if (isset($_SESSION['isLoggedIn'])) {
+            if ($_SESSION['isLoggedIn']) {
+                echo <<<HTML
 <span>
 	<a href="actions/logout.php">Wyloguj</a>
 </span>
 HTML;
-        }
-    } else {
-        echo <<<HTML
+            }
+        } else {
+            echo <<<HTML
 <span>
 		<a href="login.php">Logowanie</a>
     </span>
 HTML;
-    }
+        }
 
-    if (isset($_SESSION['isClient']))
-        if ($_SESSION['isClient']) {
-            echo <<<HTML
+        if (isset($_SESSION['isClient']))
+            if ($_SESSION['isClient']) {
+                echo <<<HTML
 <span>
 	<a href="clientArea.php">Strefa Klienta</a>
 </span>
 HTML;
-        }
-    if (isset($_SESSION['isAgent']))
-        if ($_SESSION['isAgent']) {
-            echo <<<HTML
+            }
+        if (isset($_SESSION['isAgent']))
+            if ($_SESSION['isAgent']) {
+                echo <<<HTML
 <span>
 	<a href="agentArea.php">Strefa Agenta</a>
 </span>
 HTML;
-        }
-    if (isset($_SESSION['isAdministrator']))
-        if ($_SESSION['isAdministrator']) {
-            echo <<<HTML
+            }
+        if (isset($_SESSION['isAdministrator']))
+            if ($_SESSION['isAdministrator']) {
+                echo <<<HTML
 <span>
 	<a href="adminArea.php">Strefa Administratora</a>
 </span>
 HTML;
-        }
+            }
+        if (isset($_SESSION['isAdministrator']) || isset($_SESSION['isAgent']))
+            if ($_SESSION['isAdministrator'] || isset($_SESSION['isAgent'])) {
+                echo <<<HTML
+<span>
+	<a href="dbManager.php">Menedżer bazy danych</a>
+</span>
+HTML;
+            }
     ?>
 </nav>
 <main>
