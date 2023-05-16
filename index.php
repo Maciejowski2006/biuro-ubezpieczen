@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="./styles/index.css">
 	<link rel="stylesheet" href="./styles/nav.css">
 
+	<script src="https://kit.fontawesome.com/c1cd934b70.js" crossorigin="anonymous"></script>
+
 	<?php
 		session_start();
 
@@ -98,10 +100,30 @@ HTML;
 
 
 		?>
+		<h2>O nas</h2>
+		<h3>
+			Obsługujemy <?php echo $ubezpieczenia ?> ubezpieczeń, od <?php echo $klienci ?> zadowolonych klientów, obsugiwanych w <?php echo $placowki ?> placówkach, przez <?php echo $agenci ?> agentów!
+		</h3>
+		<h2>Kontakt</h2>
+		<h3>
+			<?php
+				$query5 = "SELECT adresy.kraj, adresy.wojewodztwo, adresy.miasto, adresy.ulica, adresy.budynek, adresy.mieszkanie FROM `placowki` INNER JOIN adresy on placowki.adres_id=adresy.id WHERE placowki.nazwa=\"Ubezpieczenia Graniczna\";";
 
-		<h2>
-			Obsługujemy <?php echo $ubezpieczenia ?> ubezpieczenia, od <?php echo $klienci ?> zadowolonych klientów, obsugiwanych w <?php echo $placowki ?> placówkach, przez <?php echo $agenci ?> agentów!
-		</h2>
+				$res5 = mysqli_query($conn, $query5);
+				$_adres = mysqli_fetch_assoc($res5);
+				$adres = $_adres['kraj'] . ", " . $_adres['miasto'] . "(" . $_adres['wojewodztwo'] . "), " . $_adres['ulica'] . " " . $_adres['budynek'] . "/" . $_adres['mieszkanie'];
+			?>
+
+
+			<i class="fa-solid fa-phone"></i> +48 0700
+			<br>
+			<i class="fa-solid fa-envelope"></i> <a href="mailto:kontakt@najlepszeubezpieczenianaswiecie.eu" target="_blank">kontakt@najlepszeubezpieczenianaswiecie.eu</a>
+			<br>
+			<i class="fa-solid fa-location-dot"></i> <?php echo $adres ?>
+		</h3>
+	</section>
+	<section>
+		<img src="./bg.jpg" alt="Szczęśliwy klient">
 	</section>
 </main>
 </body>

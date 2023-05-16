@@ -1,11 +1,18 @@
+body {
+  background-image: url("../graniczna.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: #eee;
+}
+
 table {
   margin-inline: auto;
-  border: 1px solid black;
+  border: 1px solid #eee;
   border-collapse: collapse;
 }
 
 td, th {
-  border: 1px solid black;
+  border: 1px solid #eee;
   padding: 0.5rem;
 }
 

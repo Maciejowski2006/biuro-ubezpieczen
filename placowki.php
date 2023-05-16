@@ -78,8 +78,7 @@ HTML;
 </nav>
 <main>
 	<h2>Nasze placówki</h2>
-	<p>Mamy wiele placówek które obsługują miliony klientów na całym świecie. Niestety nasza baza danych jest jeszcze
-		nie dokończona, więc widoczna jest tylko jedna placówka.</p>
+	<p>Mamy wiele placówek które obsługują kilkanaście klientów na całym świecie.</p>
 	<table>
 		<tr>
 			<th>Nazwa</th>
