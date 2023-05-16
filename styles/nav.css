@@ -8,11 +8,11 @@ nav {
   align-items: center;
 }
 nav span {
-  border-left: 2px #eee dashed;
+  border-left: 2px #59a5ff dashed;
   row-gap: 1rem;
 }
 nav span:last-child {
-  border-right: 2px #eee dashed;
+  border-right: 2px #59a5ff dashed;
 }
 nav a, nav a:hover, nav a:visited {
   color: #fff;
