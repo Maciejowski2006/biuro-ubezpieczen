@@ -97,12 +97,11 @@ HTML;
 			$klienci = mysqli_fetch_array($res2)[0];
 			$agenci = mysqli_fetch_array($res3)[0];
 			$placowki = mysqli_fetch_array($res4)[0];
-
-
 		?>
 		<h2>O nas</h2>
 		<h3>
-			Obsługujemy <?php echo $ubezpieczenia ?> ubezpieczeń, od <?php echo $klienci ?> zadowolonych klientów, obsugiwanych w <?php echo $placowki ?> placówkach, przez <?php echo $agenci ?> agentów!
+			Obsługujemy <?php echo $ubezpieczenia ?> ubezpieczeń, od <?php echo $klienci ?> zadowolonych klientów,
+			obsugiwanych w <?php echo $placowki ?> placówkach, przez <?php echo $agenci ?> agentów!
 		</h3>
 		<h2>Kontakt</h2>
 		<h3>
@@ -114,10 +113,10 @@ HTML;
 				$adres = $_adres['kraj'] . ", " . $_adres['miasto'] . "(" . $_adres['wojewodztwo'] . "), " . $_adres['ulica'] . " " . $_adres['budynek'] . "/" . $_adres['mieszkanie'];
 			?>
 
-
 			<i class="fa-solid fa-phone"></i> +48 0700
 			<br>
-			<i class="fa-solid fa-envelope"></i> <a href="mailto:kontakt@najlepszeubezpieczenianaswiecie.eu" target="_blank">kontakt@najlepszeubezpieczenianaswiecie.eu</a>
+			<i class="fa-solid fa-envelope"></i> <a href="mailto:kontakt@najlepszeubezpieczenianaswiecie.eu"
+													target="_blank">kontakt@najlepszeubezpieczenianaswiecie.eu</a>
 			<br>
 			<i class="fa-solid fa-location-dot"></i> <?php echo $adres ?>
 		</h3>
